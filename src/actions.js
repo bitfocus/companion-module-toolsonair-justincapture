@@ -217,8 +217,83 @@ module.exports = {
 			},
 		}
 
-		/*
-		actions.setCapturePresets = {
+		actions.loadCapturePreset = {
+			name: 'Load Capture Preset',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Channel',
+					id: 'channel',
+					default: self.CHOICES_CHANNELS[0].id,
+					choices: self.CHOICES_CHANNELS,
+				},
+				{
+					type: 'textinput',
+					label: 'Preset Id',
+					id: 'presetId',
+					default: '',
+					useVariables: true,
+				},
+				{
+					type: 'textinput',
+					label: 'Preset Name',
+					id: 'presetName',
+					default: '',
+					useVariables: true,
+				}
+			],
+			callback: async function (action) {
+				let opt = action.options
+				let channel = opt.channel
+				let presetId = await self.parseVariablesInString(opt.presetId)
+
+				//make sure presetId is a number
+				presetId = parseInt(presetId)
+
+				let presetName = await self.parseVariablesInString(opt.presetName)
+				self.loadCapturePreset(channel, presetId, presetName)
+			},
+		}
+
+		actions.loadDestinationPreset = {
+			name: 'Load Destination Preset',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Channel',
+					id: 'channel',
+					default: self.CHOICES_CHANNELS[0].id,
+					choices: self.CHOICES_CHANNELS,
+				},
+				{
+					type: 'textinput',
+					label: 'Preset Id',
+					id: 'presetId',
+					default: '',
+					useVariables: true,
+				},
+				{
+					type: 'textinput',
+					label: 'Preset Name',
+					id: 'presetName',
+					default: '',
+					useVariables: true,
+				}
+			],
+			callback: async function (action) {
+				let opt = action.options
+				let channel = opt.channel
+				let presetId = await self.parseVariablesInString(opt.presetId)
+
+				//make sure presetId is a number
+				presetId = parseInt(presetId)
+
+				let presetName = await self.parseVariablesInString(opt.presetName)
+				self.loadDestinationPreset(channel, presetId, presetName)
+			},
+		}
+
+		/* actions.setCapturePresetsDropdown = {
 			name: 'Set Capture Presets',
 			options: [],
 			callback: async function (action) {
@@ -294,8 +369,7 @@ module.exports = {
 				default: destinationPresets[0].id,
 				choices: destinationPresets,
 			})
-		}
-		*/
+		} */                                                                                                                                                                                                                                                                             
 
 		self.setActionDefinitions(actions)
 	},
