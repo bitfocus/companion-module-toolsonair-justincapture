@@ -240,7 +240,7 @@ module.exports = {
 					id: 'presetName',
 					default: '',
 					useVariables: true,
-				}
+				},
 			],
 			callback: async function (action) {
 				let opt = action.options
@@ -278,7 +278,7 @@ module.exports = {
 					id: 'presetName',
 					default: '',
 					useVariables: true,
-				}
+				},
 			],
 			callback: async function (action) {
 				let opt = action.options
@@ -369,7 +369,7 @@ module.exports = {
 				default: destinationPresets[0].id,
 				choices: destinationPresets,
 			})
-		} */                                                                                                                                                                                                                                                                             
+		} */
 
 		self.setActionDefinitions(actions)
 	},

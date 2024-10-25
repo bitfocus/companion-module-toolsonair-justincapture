@@ -571,7 +571,7 @@ module.exports = {
 			})
 	},
 
-	loadCapturePreset(channel, presetId, presetName	) {
+	loadCapturePreset(channel, presetId, presetName) {
 		let self = this
 
 		let url = `http://${self.config.host}:${self.PORT}/ingest/requestLoadCapturePreset`

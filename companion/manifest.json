@@ -25,9 +25,7 @@
 		"entrypoint": "../index.js"
 	},
 	"manufacturer": "ToolsOnAir",
-	"products": [
-		"just:in Capture Solutions"
-	],
+	"products": ["just:in Capture Solutions"],
 	"keywords": [
 		"video",
 		"capture",
