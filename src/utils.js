@@ -235,12 +235,13 @@ module.exports = {
 		let url = `http://${self.config.host}:${self.PORT}/ingest/requestCapturePresets`
 
 		for (let i = 0; i < self.CHANNELS.length; i++) {
+			let channel = self.CHANNELS[i]
 			let body = {
-				channel: self.CHANNELS[i],
+				channel: channel,
 			}
 
 			if (self.config.verbose) {
-				self.log('debug', `Getting Capture Presets for Channel: ${self.CHANNELS[i]}`)
+				self.log('debug', `Getting Capture Presets for Channel: ${channel}`)
 			}
 
 			fetch(url, {
@@ -255,8 +256,9 @@ module.exports = {
 					let presets = data['preset']
 					//console.log(presets)
 					//stringify compare and if it's different, let's reload the actions
-					if (JSON.stringify(self.DATA[self.CHANNELS[i]].capture_presets) !== JSON.stringify(presets)) {
-						self.DATA[self.CHANNELS[i]].capture_presets = presets
+					if (JSON.stringify(self.DATA[channel].capture_presets) !== JSON.stringify(presets)) {
+						self.DATA[channel].capture_presets = presets
+						console.log(`capture_presets: Channel: ${channel}`, self.DATA[channel].capture_presets)
 						self.initActions()
 						self.initFeedbacks()
 
@@ -280,12 +282,13 @@ module.exports = {
 		let url = `http://${self.config.host}:${self.PORT}/ingest/requestDestinationPresets`
 
 		for (let i = 0; i < self.CHANNELS.length; i++) {
+			let channel = self.CHANNELS[i]
 			let body = {
-				channel: self.CHANNELS[i],
+				channel: channel,
 			}
 
 			if (self.config.verbose) {
-				self.log('debug', `Getting Destination Presets for Channel: ${self.CHANNELS[i]}`)
+				self.log('debug', `Getting Destination Presets for Channel: ${channel}`)
 			}
 
 			fetch(url, {
@@ -297,10 +300,12 @@ module.exports = {
 			})
 				.then((response) => response.json())
 				.then((data) => {
+					console.log(data)
 					let presets = data['presets']
 					//stringify compare and if it's different, let's reload the actions
-					if (JSON.stringify(self.DATA[self.CHANNELS[i]].destination_presets) !== JSON.stringify(presets)) {
-						self.DATA[self.CHANNELS[i]].destination_presets = presets
+					if (JSON.stringify(self.DATA[channel].destination_presets) !== JSON.stringify(presets)) {
+						self.DATA[channel].destination_presets = presets
+						console.log(`destination_presets: Channel: ${channel}`, self.DATA[channel].capture_presets)
 						self.initActions()
 						self.initFeedbacks()
 
@@ -566,19 +571,19 @@ module.exports = {
 			})
 	},
 
-	setCapturePreset(channel, preset) {
+	loadCapturePreset(channel, presetId, presetName	) {
 		let self = this
 
 		let url = `http://${self.config.host}:${self.PORT}/ingest/requestLoadCapturePreset`
 
 		let body = {
 			channel: channel,
-			'capture-preset-id': 0,
-			'capture-preset-name': preset,
+			'capture-preset-id': presetId,
+			'capture-preset-name': presetName,
 		}
 
 		if (self.config.verbose) {
-			self.log('debug', `Setting Capture Preset on Channel: ${channel} to: ${preset}`)
+			self.log('debug', `Setting Capture Preset on Channel: ${channel} to: ${presetId} - ${presetName}`)
 		}
 
 		fetch(url, {
@@ -597,19 +602,19 @@ module.exports = {
 			})
 	},
 
-	setDestinationPreset(channel, preset) {
+	loadDestinationPreset(channel, presetId, presetName) {
 		let self = this
 
 		let url = `http://${self.config.host}:${self.PORT}/ingest/requestLoadDestinationPreset`
 
 		let body = {
 			channel: channel,
-			'destination-preset-id': 0,
-			'destination-preset-name': preset,
+			'destination-preset-id': presetId,
+			'destination-preset-name': presetName,
 		}
 
 		if (self.config.verbose) {
-			self.log('debug', `Setting Destination Preset on Channel: ${channel} to: ${preset}`)
+			self.log('debug', `Setting Destination Preset on Channel: ${channel} to: ${presetId} - ${presetName}`)
 		}
 
 		fetch(url, {
