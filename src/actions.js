@@ -293,6 +293,32 @@ module.exports = {
 			},
 		}
 
+		actions.loadNamingConvention = {
+			name: 'Load Naming Convention',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Channel',
+					id: 'channel',
+					default: self.CHOICES_CHANNELS[0].id,
+					choices: self.CHOICES_CHANNELS,
+				},
+				{
+					type: 'textinput',
+					label: 'Name',
+					id: 'name',
+					default: '',
+					useVariables: true,
+				},
+			],
+			callback: async function (action) {
+				let opt = action.options
+				let channel = opt.channel
+				let name = await self.parseVariablesInString(opt.name)
+				self.loadNamingConvention(channel, name)
+			},
+		}
+
 		/* actions.setCapturePresetsDropdown = {
 			name: 'Set Capture Presets',
 			options: [],

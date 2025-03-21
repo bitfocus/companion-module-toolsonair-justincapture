@@ -632,4 +632,34 @@ module.exports = {
 				//console.error('Error:', error)
 			})
 	},
+
+	loadNamingConvention(channel, name) {
+		let self = this
+
+		let url = `http://${self.config.host}:${self.PORT}/ingest/requestLoadNamingConvention`
+
+		let body = {
+			channel: channel,
+			name: name,
+		}
+
+		if (self.config.verbose) {
+			self.log('debug', `Setting Naming Convention on Channel: ${channel} to: ${name}`)
+		}
+
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				//don't really need to do anything
+			})
+			.catch((error) => {
+				//console.error('Error:', error)
+			})
+	},
 }
