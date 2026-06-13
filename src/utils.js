@@ -28,6 +28,7 @@ module.exports = {
 			}
 
 			clearInterval(self.POLLING_INTERVAL)
+			self.POLLING_INTERVAL = undefined
 		}
 	},
 

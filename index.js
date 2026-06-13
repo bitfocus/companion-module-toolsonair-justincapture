@@ -45,6 +45,8 @@ class justinCaptureInstance extends InstanceBase {
 	async configUpdated(config) {
 		this.config = config
 
+		this.stopPolling()
+
 		this.updateStatus(InstanceStatus.Connecting)
 
 		this.initActions()
