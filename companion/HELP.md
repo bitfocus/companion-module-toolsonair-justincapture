@@ -11,6 +11,9 @@ This module will allow you to control the ToolsOnAir just:in Capture Solutions. 
 
 - Start/Stop/Toggle Recording
 - Split Movie
+- Load Capture Preset
+- Load Destination Preset
+- Load Naming Convention
 
 ## Feedbacks
 
